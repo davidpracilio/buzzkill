@@ -8,6 +8,17 @@ const INITIAL_NOTIFICATIONS = [
   { id: 5, app: 'Shopping', text: 'Flash sale ends tonight!', muted: false },
 ]
 
+const RANDOM_NOTIFICATIONS = [
+  { app: 'Chat', text: 'Alex: did you see this meme?' },
+  { app: 'Email', text: 'You have 3 unread promotions' },
+  { app: 'Calendar', text: 'Reminder: dentist tomorrow at 9' },
+  { app: 'Social', text: 'Someone you barely know has a birthday' },
+  { app: 'Shopping', text: 'Your cart misses you' },
+  { app: 'Games', text: 'Your crops are ready to harvest!' },
+  { app: 'News', text: 'Breaking: something happened somewhere' },
+  { app: 'Fitness', text: 'Time to stand up and move' },
+]
+
 const FILTERS = ['all', 'active', 'muted']
 
 function Demo() {
@@ -29,6 +40,14 @@ function Demo() {
 
   const setAllMuted = (muted) => {
     setNotifications((current) => current.map((n) => ({ ...n, muted })))
+  }
+
+  const addRandom = () => {
+    const pick = RANDOM_NOTIFICATIONS[Math.floor(Math.random() * RANDOM_NOTIFICATIONS.length)]
+    setNotifications((current) => [
+      { ...pick, id: Math.max(0, ...current.map((n) => n.id)) + 1, muted: false },
+      ...current,
+    ])
   }
 
   return (
@@ -54,6 +73,9 @@ function Demo() {
             ))}
           </div>
           <div className="demo-actions">
+            <button type="button" className="btn btn-ghost" onClick={addRandom}>
+              🎲 Random notification
+            </button>
             <button type="button" className="btn btn-ghost" onClick={() => setAllMuted(false)}>
               Unmute all
             </button>
