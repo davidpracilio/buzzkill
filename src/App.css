@@ -276,6 +276,33 @@
   font-size: 0.9rem;
 }
 
+/* High contrast */
+
+:root[data-theme='contrast'] .nav a,
+:root[data-theme='contrast'] .brand {
+  text-decoration: underline;
+}
+
+:root[data-theme='contrast'] .btn-ghost:hover,
+:root[data-theme='contrast'] .nav a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+:root[data-theme='contrast'] .tabs {
+  border: 1px solid var(--border);
+}
+
+:root[data-theme='contrast'] .tab[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-text);
+  box-shadow: none;
+}
+
+:root[data-theme='contrast'] .notification.is-muted > div {
+  opacity: 1;
+}
+
 @media (max-width: 560px) {
   .nav {
     display: none;

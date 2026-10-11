@@ -1,4 +1,12 @@
-function Header({ theme, onToggleTheme }) {
+const THEME_BUTTONS = {
+  light: { icon: '☀️', label: 'light' },
+  dark: { icon: '🌙', label: 'dark' },
+  contrast: { icon: '◐', label: 'high contrast' },
+}
+
+function Header({ nextTheme, onToggleTheme }) {
+  const next = THEME_BUTTONS[nextTheme]
+
   return (
     <header className="header">
       <a className="brand" href="#top">
@@ -14,9 +22,9 @@ function Header({ theme, onToggleTheme }) {
         type="button"
         className="btn btn-ghost"
         onClick={onToggleTheme}
-        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+        aria-label={`Switch to ${next.label} theme`}
       >
-        {theme === 'dark' ? '☀️' : '🌙'}
+        {next.icon}
       </button>
     </header>
   )

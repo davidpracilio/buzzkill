@@ -5,9 +5,12 @@ import Demo from './components/Demo.jsx'
 import Pricing from './components/Pricing.jsx'
 import './App.css'
 
+const THEMES = ['light', 'dark', 'contrast']
+
 function getInitialTheme() {
   const saved = localStorage.getItem('theme')
-  if (saved) return saved
+  if (THEMES.includes(saved)) return saved
+  if (window.matchMedia('(prefers-contrast: more)').matches) return 'contrast'
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
@@ -19,11 +22,13 @@ function App() {
     localStorage.setItem('theme', theme)
   }, [theme])
 
+  const nextTheme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length]
+
   return (
     <div id="top" className="page">
       <Header
-        theme={theme}
-        onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
+        nextTheme={nextTheme}
+        onToggleTheme={() => setTheme(nextTheme)}
       />
 
       <main>
